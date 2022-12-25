@@ -1,0 +1,439 @@
+﻿<Window x:Class="AdminConsol.ViewConsole"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdminConsol"
+        mc:Ignorable="d"
+        Title="Консоль" Height="450" Width="800" Background="#FF1E89A0" BorderBrush="#FF1E89A0" Icon="/AdminConsol;component/Root/1300.jpg">
+    <!--Набор стиля-->
+    <Window.Resources>
+        <!--Background-->
+
+        <Style x:Key="StyleBackground">
+            <Setter Property="Control.Background" Value="#FF1E89A0"/>
+            <Setter Property="Control.Foreground" Value="Black" />
+            <Setter Property="Control.BorderBrush" Value="#FF1E89A0" />
+        </Style>
+        <!--Button-->
+        <Style x:Key="StyleButton">
+            <Setter Property="Button.Background" Value="#FF186FB8"/>
+            <Setter Property="Button.Foreground" Value="Black" />
+            <Setter Property="Button.FontFamily" Value="Arial Black" />
+            <Setter Property="Button.FontSize" Value="14" />
+        </Style>
+        <!--List-->
+        <Style x:Key="StyleList">
+            <Setter Property="ListView.Background" Value="#FF1E89A0"/>
+            <Setter Property="ListView.Foreground" Value="Black" />
+            <Setter Property="ListView.FontFamily" Value="Arial Black" />
+            <Setter Property="ListView.FontSize" Value="12" />
+        </Style>
+        <!--TextBox-->
+        <Style x:Key="StyleTextBox">
+            <Setter Property="TextBox.Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+            <Setter Property="TextBox.Foreground" Value="Black" />
+            <Setter Property="TextBox.FontFamily" Value="Arial Black" />
+            <Setter Property="TextBox.FontSize" Value="14" />
+            <Setter Property="TextBox.VerticalAlignment" Value="Center" />
+            <Setter Property="TextBox.TextWrapping" Value="Wrap" />
+        </Style>
+        <!--TableItem-->
+        <Style x:Key="StyleTableItem">
+            <Setter Property="TabItem.Background" Value="#FF1E89A0"/>
+            <Setter Property="TabItem.BorderBrush" Value="#FF1E89A0" />
+            <Setter Property="TabItem.Foreground" Value="Black" />
+            <Setter Property="TextBox.FontFamily" Value="Arial Black" />
+            <Setter Property="TextBox.FontSize" Value="14" />
+            <Setter Property="TextBox.VerticalAlignment" Value="Center" />
+            <Setter Property="TextBox.TextWrapping" Value="Wrap" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Style="{StaticResource StyleBackground}">
+        <!--Сетки-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!--Сетка 1ячейка-->
+        <TextBlock x:Name="AdminTextBlock" Text="Админ"
+                   Margin="0" Width="782" Height="30" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                   Style="{StaticResource StyleTextBox}"/>
+
+        <!--Сетка 2ячейка-->
+        <TabControl Grid.Row="2" x:Name="TabConsol" TabStripPlacement="Left" Style="{StaticResource StyleBackground}" >
+            <!--Окно рабочего стола-->
+            <TabItem x:Name="Table" IsSelected="True" Style="{StaticResource StyleTableItem}">
+                <TabItem.Header >
+                    <TextBlock >
+                            Рабочий стол
+                    </TextBlock>
+                </TabItem.Header>
+
+                <TabItem.Content>
+                    <!--Сетка поля-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <!--Контент-->
+                        <ListView x:Name="ListMessange" ItemsSource="{Binding ListMessange}"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource StyleList}" >
+                            <ListView.View>
+                                <GridView >
+                                    <GridViewColumn DisplayMemberBinding="{Binding Id}" >
+                                        <GridViewColumnHeader x:Name="Id" Content="Id" />
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding TimeRequest}">
+                                        <GridViewColumnHeader x:Name="TimeRequest" Content="Время заявки" />
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding EmailSender}">
+                                        <GridViewColumnHeader x:Name="EmailSender" Content="Email отправителя" />
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding UserRecipientMess}">
+                                        <GridViewColumnHeader x:Name="UserRecipientMess" Content="Получатель" />
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem x:Name="SelectionChangedMenuItem" Header="Обработать чат" Click="ListMessange_SelectionChanged" />
+                                    <MenuItem x:Name="AddMessengeMenuItem" Header="Создать чат" Click="AddMessenge_Click" />
+                                    <MenuItem x:Name="RefButtonMenuItem" Header="Обновить список чатов" Click="RefButton_Click"/>
+                                    <MenuItem x:Name="DeleteMenuItem" Header="Удалить чат" Click="Delete_Click"/>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                        </ListView>
+                        <Button x:Name="TableUserButton" Content="Справочник пользователей" FontSize="10" Grid.Row="0" Grid.Column="3" Click="TableUserButton_Click"/>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <!--Окно Главное-->
+            <TabItem x:Name="Main" Style="{StaticResource StyleTableItem}">
+                <TabItem.Header>
+                    <TextBlock>
+                            Главная
+                    </TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30*"></RowDefinition>
+                            <RowDefinition Height="30*"></RowDefinition>
+                            <RowDefinition Height="30*"></RowDefinition>
+                            <RowDefinition Height="30*"></RowDefinition>
+                            <RowDefinition Height="30*"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30*"></RowDefinition>
+                            <RowDefinition Height="30*"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <!--Контент-->
+
+
+                        <Button x:Name="ButtonNewImageMain" Content="Выбрать заставку" FontSize="8" Grid.Column="0" Click="ButtonNewImageMain_Click"/>
+                        <Button x:Name="ButtonNewImageLogo" Content="Выбрать лого" FontSize="8" Grid.Column="1" Click="ButtonNewImageLogo_Click"/>
+                        <Image x:Name="ImageCurrent" Source="{Binding PhotoMain}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="9"/>
+                        <Image x:Name="ImageLogo" Source="{Binding LogoImg}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Grid.RowSpan="1"/>
+                        <Button x:Name="ButtonSaveMain" Content="Сохранить все" FontSize="8" Grid.Column="2" Click="ButtonSaveMain_Click"/>
+
+                        <TextBox x:Name="LabelH1" Grid.ColumnSpan="3" Grid.Row="2" TextWrapping="Wrap"  Text="{Binding LabelH1TextBox}" TextAlignment="Center" FontSize="20" Grid.Column="1">
+                            <TextBox.BorderBrush>
+                                <ImageBrush/>
+                            </TextBox.BorderBrush>
+                            <TextBox.Background>
+                                <ImageBrush/>
+                            </TextBox.Background>
+                        </TextBox>
+                        <TextBox x:Name="LabelH3" Grid.ColumnSpan="3" Grid.Row="3" TextWrapping="Wrap" Text="{Binding LabelH3TextBox, Mode=TwoWay}" TextAlignment="Center" FontSize="20" Grid.Column="1">
+                            <TextBox.BorderBrush>
+                                <ImageBrush/>
+                            </TextBox.BorderBrush>
+                            <TextBox.Background>
+                                <ImageBrush/>
+                            </TextBox.Background>
+                        </TextBox>
+                        <TextBox x:Name="LabelDescription" Grid.ColumnSpan="3" Grid.Row="4" TextWrapping="Wrap" Text="{Binding LabelDescriptionTextBox, Mode=TwoWay}" TextAlignment="Center" FontSize="14" Grid.Column="1">
+                            <TextBox.BorderBrush>
+                                <ImageBrush/>
+                            </TextBox.BorderBrush>
+                            <TextBox.Background>
+                                <ImageBrush/>
+                            </TextBox.Background>
+                        </TextBox>
+                        <TextBox x:Name="UserNameTextBox" Grid.Column="2" Grid.Row="5" TextWrapping="Wrap" Text="{Binding UserNameTextBox, Mode=TwoWay}" TextAlignment="Center" >
+                            <TextBox.BorderBrush>
+                                <ImageBrush/>
+                            </TextBox.BorderBrush>
+                            <TextBox.Background>
+                                <ImageBrush/>
+                            </TextBox.Background>
+                        </TextBox>
+                        <TextBox x:Name="EmailTextBox" Grid.Column="2" Grid.Row="6" TextWrapping="Wrap" Text="{Binding EmailTextBox, Mode=TwoWay}" TextAlignment="Center" >
+                            <TextBox.BorderBrush>
+                                <ImageBrush/>
+                            </TextBox.BorderBrush>
+                            <TextBox.Background>
+                                <ImageBrush/>
+                            </TextBox.Background>
+                        </TextBox>
+                        <TextBox x:Name="ButtonChat" Grid.Column="2" Grid.Row="7" TextWrapping="Wrap" Text="{Binding ButtonChatTextBox, Mode=TwoWay}" BorderBrush="#FFABADB3" TextAlignment="Center"/>
+
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <!--Окно проекты-->
+            <TabItem x:Name="Project" Style="{StaticResource StyleTableItem}">
+                <TabItem.Header>
+                    <TextBlock>
+                            Проекты
+                    </TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.8*"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="0.1*"></RowDefinition>
+                            <!--<RowDefinition></RowDefinition>-->
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.35*"></ColumnDefinition>
+
+                        </Grid.ColumnDefinitions>
+
+                        <ListView x:Name="ProjectListView" ItemsSource="{Binding ProjectListView}" Grid.Row="0" Grid.ColumnSpan="4" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                            <ListView.Background>
+                                <ImageBrush/>
+                            </ListView.Background>
+
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+
+                                        <Image x:Name="ImageProjectItem" Width="500" Source="{Binding PhotoProject}"/>
+                                        <TextBlock Text="{Binding Title}" TextAlignment="Center" FontSize="18"/>
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+                        <Button x:Name="AddProject" Grid.Column="0" Grid.Row="1" Content="Добавить проект" Click="AddProject_Click"/>
+                        <Button x:Name="EditProject" Grid.Column="1" Grid.Row="1" Content="Изменить проект" Click="EditProject_Click"/>
+                        <Button x:Name="DeleteProject" Grid.Column="2" Grid.Row="1" Content="Удалить проект" Click="DeleteProject_Click"/>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <!--Окно сервиса-->
+            <TabItem x:Name="Service" Style="{StaticResource StyleTableItem}">
+                <TabItem.Header>
+                    <TextBlock>
+                            Услуги
+                    </TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.8*"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="0.1*"></RowDefinition>
+                            <!--<RowDefinition></RowDefinition>-->
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.35*"></ColumnDefinition>
+
+                        </Grid.ColumnDefinitions>
+
+                        <ListView x:Name="ServiceListView" ItemsSource="{Binding ServiceListView}" Grid.Row="0" Grid.ColumnSpan="4" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                            <ListView.Background>
+                                <ImageBrush/>
+                            </ListView.Background>
+
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+
+                                    <StackPanel Orientation="Vertical" Width="700">
+                                        <Expander Header="{Binding TitleService}">
+                                            <TextBlock Text="{Binding DesriptionService}" TextAlignment="Left" FontSize="18" TextWrapping="Wrap"/>
+                                        </Expander>
+                                    </StackPanel>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+                        <Button x:Name="AddService" Grid.Column="0" Grid.Row="1" Content="Добавить услугу" Click="AddService_Click"/>
+                        <Button x:Name="EditService" Grid.Column="1" Grid.Row="1" Content="Изменить услугу" Click="EditService_Click"/>
+                        <Button x:Name="DeleteService" Grid.Column="2" Grid.Row="1" Content="Удалить услугу" Click="DeleteService_Click"/>
+                       
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <!--Окно блог-->
+            <TabItem x:Name="Blog" Style="{StaticResource StyleTableItem}">
+                <TabItem.Header>
+                    <TextBlock>
+                            Блог
+                    </TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.8*"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="0.1*"></RowDefinition>
+                            <!--<RowDefinition></RowDefinition>-->
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.35*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.35*"></ColumnDefinition>
+
+                        </Grid.ColumnDefinitions>
+
+                        <ListView x:Name="BlogtListView" ItemsSource="{Binding BlogtListView,Mode=OneWay}" Grid.Row="0" Grid.ColumnSpan="4" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                            <ListView.Background>
+                                <ImageBrush/>
+                            </ListView.Background>
+
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical" Width="300">
+
+                                        <TextBlock Text="{Binding DateBlog}" TextAlignment="Center" FontSize="10"/>
+                                        <Image x:Name="ImageBlogItem" Width="250" Source="{Binding PhotoBlog}"/>
+                                        <TextBlock Text="{Binding TitleBlog}" TextAlignment="Center" FontSize="18" TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding DesriptionBlog}" TextAlignment="Center" FontSize="10" TextWrapping="Wrap"/>
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+                        <Button x:Name="AddBlog" Grid.Column="0" Grid.Row="1" Content="Добавить пост" Click="AddBlog_Click"/>
+                        <Button x:Name="EditBlog" Grid.Column="1" Grid.Row="1" Content="Изменить пост" Click="EditBlog_Click"/>
+                        <Button x:Name="DeleteBlog" Grid.Column="2" Grid.Row="1" Content="Удалить пост" Click="DeleteBlog_Click"/>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <!--Окно контактов-->
+            <TabItem x:Name="Contact" Style="{StaticResource StyleTableItem}">
+                <TabItem.Header>
+                    <TextBlock>
+                            Контакты
+                    </TextBlock>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30*"></RowDefinition>
+                            <RowDefinition Height="30*"></RowDefinition>
+                            <RowDefinition Height="30*"></RowDefinition>
+                            <RowDefinition Height="30*"></RowDefinition>
+                            <RowDefinition Height="30*"></RowDefinition>
+                            <RowDefinition Height="5"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <!--Контент-->
+
+                        <Button x:Name="ButtonNewImageContact"  Content="Выбрать новый рисунок/карту" FontSize="8" Click="ButtonNewImageContact_Click"  Grid.Column="4"/>
+                        <Image x:Name="ImageContactCurrent" Source="{Binding ImageContact}" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="5" Grid.RowSpan="6"/>
+                        <Button x:Name="ButtonSaveContact" Content="Сохранить" FontSize="8" Grid.Column="4" Click="ButtonSaveContact_Click" Grid.Row="8"/>
+
+                        <TextBox x:Name="TextContactA" Text="{Binding TextContactA}"  Grid.Row="2" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" AcceptsReturn="True"/>
+                        <TextBox x:Name="TextContactB" Text="{Binding TextContactB}"  Grid.Row="3" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" AcceptsReturn="True"/>
+                        <TextBox x:Name="TextContactC" Text="{Binding TextContactC}"  Grid.Row="4" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" AcceptsReturn="True"/>
+                        
+                        <ListView x:Name="LinkListView" ItemsSource="{Binding LinkListView}" Grid.Row="8" Grid.ColumnSpan="4" 
+                                  ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListView.Background>
+                                <ImageBrush/>
+                            </ListView.Background>
+
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical" Width="40">
+
+                                        <Image x:Name="ImageBlogItem" Width="30" Source="{Binding ImageLink}"/>
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+                        <Button x:Name="ButtonLinkContact" Content="Ссылки" FontSize="8" Grid.Column="0" Click="ButtonLinkContact_Click" Grid.Row="9"/>
+
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+
+        </TabControl>
+
+    </Grid>
+</Window>

@@ -1,0 +1,3 @@
+﻿APIPATH=https://localhost:44316
+UserName=admin
+Email=admin@admin.com

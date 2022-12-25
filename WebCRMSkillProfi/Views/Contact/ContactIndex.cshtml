@@ -1,0 +1,65 @@
+﻿@model WebCRMSkillProfi.ViewModels.ContactViewModel
+@{
+    ViewData["Title"] = "Contact Page";
+}
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="ru">
+<head>
+
+    <title>Контакты</title>
+    <link rel="stylesheet" href="~/css/Contact.css" media="screen">
+
+</head>
+
+<body background="~/images/@Model._imagePath" class="u-xl-mode" data-lang="ru">
+    <section class="u-align-center u-clearfix u-section-1" id="sec-f46f">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <h2 class="u-text u-text-1">Контакты</h2>
+            <div class="u-clearfix u-expanded-width u-gutter-10 u-layout-wrap u-layout-wrap-1">
+                <div class="u-gutter-0 u-layout">
+                    <div class="u-layout-row">
+                        <div class="u-size-30">
+                            <div class="u-layout-col">
+                                <div class="u-align-left u-container-style u-layout-cell u-left-cell u-size-60 u-layout-cell-1">
+                                    <div class="u-container-layout u-container-layout-1">
+
+                                        <p class="u-text u-text-2">@Model._TextContactA</p>
+                                        <p class="u-text u-text-2">@Model._TextContactB</p>
+                                        <p class="u-text u-text-2">@Model._TextContactC</p>
+
+                                        <div class="u-social-icons u-spacing-20 u-social-icons-1">
+                                            @for (int i = 0; i < Model._Link.Count; i++)
+                                            {
+                                                <a class="u-social-url" target="_blank" href="@Model._Link[i].Url">
+                                                    <span class="u-icon u-social-icon u-social-twitter u-text-white">
+                                                        <img  src="~/images/@Model._Link[i].ImageLinkPath" alt="">
+                                                    </span>
+                                                </a>
+                                            }
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="u-size-30">
+                            <div class="u-layout-col">
+                                <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-60 u-layout-cell-2">
+                                    <div class="u-container-layout u-container-layout-2">
+                                        <div class="u-expanded u-grey-light-2 u-map">
+                                            <div class="embed-responsive">
+                                                <iframe class="embed-responsive-item" src="~/images/@Model.ImageContactPath"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

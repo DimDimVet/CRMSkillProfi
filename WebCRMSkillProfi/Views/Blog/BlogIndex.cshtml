@@ -1,0 +1,79 @@
+﻿@model WebCRMSkillProfi.ViewModels.BlogViewModel
+@{
+    ViewData["Title"] = "Blog Page";
+}
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="ru">
+<head>
+    <title>Блог</title>
+    <link rel="stylesheet" href="~/css/Blog.css" media="screen">
+</head>
+<body background="~/images/@Model._imagePath" class="u-xl-mode" data-lang="ru">
+   
+    <section class="u-align-left u-clearfix u-grey-10 u-section-1" id="sec-9bf4">
+        <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+            <div class="u-blog u-expanded-width u-layout-horizontal u-blog-1">
+                <div class="u-repeater u-repeater-1">
+
+                    @for (int i = 0; i < Model._BlogList.Count; i++)
+                    {
+                        <div class="u-align-left u-blog-post u-container-style u-repeater-item u-white u-repeater-item-1" title="БлогСтраница" rel="nofollow">
+                            <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1">
+                                <a class="u-post-header-link" >
+                                    <img alt=""  class="u-blog-control u-expanded-width u-image u-image-default u-image-1" src="~/images/@Model._BlogList[i].ImageBlogPath">
+                                </a>
+                                <h4 class="u-blog-control u-text u-text-1">
+                                    <a class="u-post-header-link" >@Model._BlogList[i].DateBlog</a>
+                                    <a class="u-post-header-link" >@Model._BlogList[i].TitleBlog</a>
+                                </h4>
+
+                                <form method="post" controller="Blog" action="BlogItem">
+                                    <div>
+                                        <input type="hidden" name="GetId" value=@Model._BlogList[i].Id />
+                                        <p><input type="submit" class="u-blog-control u-btn u-button-style u-btn-1" value="Прочесть..." /></p>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <a class="u-absolute-vcenter u-gallery-nav u-gallery-nav-prev u-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-white u-gallery-nav-1" href="#" role="button">
+                    <span aria-hidden="true">
+                        <svg viewBox="0 0 451.847 451.847">
+                            <path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path>
+                        </svg>
+                    </span>
+                    <span class="sr-only">
+                        <svg viewBox="0 0 451.847 451.847">
+                            <path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path>
+                        </svg>
+                    </span>
+                </a>
+                <a class="u-absolute-vcenter u-gallery-nav u-gallery-nav-next u-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-white u-gallery-nav-2" href="#" role="button">
+                    <span aria-hidden="true">
+                        <svg viewBox="0 0 451.846 451.847">
+                            <path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path>
+                        </svg>
+                    </span>
+                    <span class="sr-only">
+                        <svg viewBox="0 0 451.846 451.847">
+                            <path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

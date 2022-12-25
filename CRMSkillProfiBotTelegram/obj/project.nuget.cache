@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "s+p6QZwTOUuv9DELn2+uoN8UVPOKL7XdK3lMX99k5oGbaNqisEIYgXw+R3n4X8tMBl/mRMIR+KvHjQUTt+NRbg==",
+  "success": true,
+  "projectFilePath": "E:\\PROJECT\\CRMSkillProfi\\CRMSkillProfiBotTelegram\\CRMSkillProfiBotTelegram.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Win10_Dim\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\Win10_Dim\\.nuget\\packages\\telegram.bot\\18.0.0\\telegram.bot.18.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

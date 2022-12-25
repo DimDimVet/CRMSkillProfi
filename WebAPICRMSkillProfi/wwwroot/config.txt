@@ -1,0 +1,2 @@
+﻿DBPATH-Server=(localdb)\mssqllocaldb;Database=testVideo10;Trusted_Connection=True;MultipleActiveResultSets=true
+ApiWebEventURL-https://localhost:44338/api/event

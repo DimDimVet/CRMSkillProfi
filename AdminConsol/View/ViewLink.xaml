@@ -1,0 +1,89 @@
+﻿<Window x:Class="AdminConsol.View.ViewLink"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdminConsol.View"
+        mc:Ignorable="d"
+        Title="Ссылки" Height="450" Width="600" MinWidth="600" MinHeight="450" MaxHeight="450" MaxWidth="600">
+    <!--Набор стиля-->
+    <Window.Resources>
+        <!--Background-->
+        <Style x:Key="StyleBackground">
+            <Setter Property="Control.Background" Value="#FF1E89A0"/>
+            <Setter Property="Control.Foreground" Value="Black" />
+            <Setter Property="Control.BorderBrush" Value="#FF1E89A0" />
+        </Style>
+        <!--Button-->
+        <Style x:Key="StyleButton">
+            <Setter Property="Button.Background" Value="#FF186FB8"/>
+            <Setter Property="Button.Foreground" Value="Black" />
+            <Setter Property="Button.FontFamily" Value="Arial Black" />
+            <Setter Property="Button.FontSize" Value="14" />
+        </Style>
+        <!--TextBox-->
+        <Style x:Key="StyleTextBox">
+            <Setter Property="TextBox.Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+            <Setter Property="TextBox.Foreground" Value="Black" />
+            <Setter Property="TextBox.FontFamily" Value="Arial Black" />
+            <Setter Property="TextBox.FontSize" Value="14" />
+            <Setter Property="TextBox.VerticalAlignment" Value="Center" />
+            <Setter Property="TextBox.TextWrapping" Value="Wrap" />
+        </Style>
+    </Window.Resources>
+    <!--Основная сетка-->
+    <Grid Style="{StaticResource StyleBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <!--<RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="0.3*"></RowDefinition>
+            <RowDefinition Height="0.3*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>-->
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <!--<ColumnDefinition Width="0.25*"></ColumnDefinition>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>-->
+        </Grid.ColumnDefinitions>
+        <!--Контент-->
+        <ListView x:Name="LinkListView" ItemsSource="{Binding LinkListView,Mode=OneWay}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource StyleButton}" 
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                          >
+            <ListView.Background>
+                <ImageBrush/>
+            </ListView.Background>
+
+            <ListView.ItemsPanel >
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"></StackPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+                    <StackPanel x:Name="Sp" Orientation="Horizontal" Width="500" IsEnabled="True">
+                        <Button x:Name="ImgLinkButton" Content="Img" Click="ImgLinkButton_Click" />
+                        <Image x:Name="ImageBlogItem" Width="50" Source="{Binding ImageLink}" OpacityMask="#FF5492C5" />
+                        <TextBox x:Name="TextBoxLink" Text="{Binding Url, Mode=TwoWay}" TextAlignment="Center" FontSize="10" Height="Auto" Width="300" />
+                        <Button x:Name="EditLinkButton" Content="Save" IsEnabled="True" Click="SaveLinkButton_Click" />
+                        <Button x:Name="DeleteLinkButton" Content="Del" Click="DeleteLinkButton_Click"/>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+        <Button x:Name="AddLinkButton" Content="Добавить" Grid.Column="2" Grid.Row="3" Click="AddLinkButton_Click"/>
+
+    </Grid>
+</Window>

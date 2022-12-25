@@ -1,0 +1,96 @@
+﻿<Window x:Name="ConsoleMessange"  x:Class="AdminConsol.View.ViewConsoleMessange"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdminConsol.View"
+        mc:Ignorable="d"
+        Title="Сообщение" Height="650" Width="450" MaxWidth="450" MaxHeight="650" MinWidth="450" MinHeight="650" Icon="/AdminConsol;component/Root/1300.jpg">
+    <Window.Resources>
+        <!--Background-->
+        <Style x:Key="StyleBackground">
+            <Setter Property="Control.Background" Value="#FF1E89A0"/>
+            <Setter Property="Control.Foreground" Value="Black" />
+            <Setter Property="Control.BorderBrush" Value="#FF1E89A0" />
+        </Style>
+        <!--Button-->
+        <Style x:Key="StyleButton">
+            <Setter Property="Button.Background" Value="#FF186FB8"/>
+            <Setter Property="Button.Foreground" Value="Black" />
+            <Setter Property="Button.FontFamily" Value="Arial Black" />
+            <Setter Property="Button.FontSize" Value="14" />
+        </Style>
+        <!--List-->
+        <Style x:Key="StyleList">
+            <Setter Property="ListView.Background" Value="#FF1E89A0"/>
+            <Setter Property="ListView.Foreground" Value="Black" />
+            <Setter Property="ListView.FontFamily" Value="Arial Black" />
+            <Setter Property="ListView.FontSize" Value="12" />
+        </Style>
+        <!--Label-->
+        <Style x:Key="StyleLabel">
+            <Setter Property="Label.Background" Value="#FF1E89A0"/>
+            <Setter Property="Label.Foreground" Value="Black" />
+            <Setter Property="Label.FontFamily" Value="Arial Black" />
+            <Setter Property="Label.FontSize" Value="14" />
+            <Setter Property="Label.VerticalAlignment" Value="Center" />
+        </Style>
+        <!--TextBox-->
+        <Style x:Key="StyleTextBox">
+            <Setter Property="TextBox.Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+            <Setter Property="TextBox.Foreground" Value="Black" />
+            <Setter Property="TextBox.FontFamily" Value="Arial Black" />
+            <Setter Property="TextBox.FontSize" Value="14" />
+            <Setter Property="TextBox.VerticalAlignment" Value="Center" />
+            <Setter Property="TextBox.TextWrapping" Value="Wrap" />
+        </Style>
+    </Window.Resources>
+    <!--Основная сетка-->
+    <Grid Style="{StaticResource StyleBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="120"></RowDefinition>
+            <RowDefinition Height="120"></RowDefinition>
+            <RowDefinition Height="120"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!--Контент-->
+        <Label Content="Номер" Grid.Row="0" Grid.Column="0" FlowDirection="RightToLeft" Style="{StaticResource StyleLabel}" UseLayoutRounding="False"/>
+        <!--<Label Content="Время" Grid.Row="1" Grid.Column="0" FlowDirection="RightToLeft" Style="{StaticResource StyleLabel}" UseLayoutRounding="False"/>-->
+        <Label Content="Текст" Grid.Row="4" Grid.Column="0" FlowDirection="RightToLeft" Style="{StaticResource StyleLabel}" UseLayoutRounding="False"/>
+        <Label Content="Получатель" Grid.Row="5" Grid.Column="0" FlowDirection="RightToLeft" Style="{StaticResource StyleLabel}" UseLayoutRounding="False"/>
+        <Label Content="Отправитель" Grid.Row="6" Grid.Column="0" FlowDirection="RightToLeft" Style="{StaticResource StyleLabel}" UseLayoutRounding="False"/>
+        <!--//-->
+        <TextBox x:Name="IdTextBox" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="1" Text="{Binding Id, Mode=TwoWay}" Style="{StaticResource StyleTextBox}"  IsEnabled="False"/>
+        <!--<TextBox x:Name="TimeRequestTextBox" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Text="{Binding TimeRequest, Mode=TwoWay}" Style="{StaticResource StyleTextBox}"  IsEnabled="False"/>-->
+        <TextBox x:Name="TextMessangeTextBox" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="3" Text="{Binding TextMessange, Mode=TwoWay}" />
+        <TextBox x:Name="NewTextMessangeTextBox" Grid.ColumnSpan="2" Grid.Row="4" Grid.Column="1" Text="{Binding NewTextMessange, Mode=TwoWay}" Style="{StaticResource StyleTextBox}"  Height="109" Margin="0,11,0,0"/>
+        <!--<TextBox x:Name="EmailTextBox" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="1" Text="{Binding Email, Mode=TwoWay}" Style="{StaticResource StyleTextBox}" GotFocus="EmailTextBox_GotFocus" KeyDown="Esc_KeyDown"/>-->
+        <ComboBox x:Name="EmailComboBox" ItemsSource="{Binding EmailComboBox,Mode=OneWay}" Grid.ColumnSpan="2" Grid.Row="5" Grid.Column="1" Style="{StaticResource StyleTextBox}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="SurName" Text="{Binding UserName}" Margin="0" FontSize="12" TextWrapping="WrapWithOverflow"/>
+                        <TextBlock Text="  "/>
+                        <TextBlock x:Name="Name" Text="{Binding Email}" Margin="0" FontSize="12" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBox x:Name="UserNameMessTextBox" Grid.ColumnSpan="2" Grid.Row="6" Grid.Column="1" Text="{Binding EmailSender, Mode=TwoWay}" Style="{StaticResource StyleTextBox}" IsEnabled="False" />
+        <Button x:Name="SaveButton" Content="Сохранить" Grid.Column="1" Grid.Row="8" Style="{StaticResource StyleButton}" Click="SaveButton_Click" />
+        
+        <!--<Button x:Name="FindButton" Content="Искать" Grid.Column="1" Grid.Row="8" Style="{StaticResource StyleButton}" Click="FindButton_Click"/>-->
+    </Grid>
+</Window>

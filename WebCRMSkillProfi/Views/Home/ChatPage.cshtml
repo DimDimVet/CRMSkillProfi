@@ -1,0 +1,48 @@
+﻿
+@model WebCRMSkillProfi.ViewModels.ChatViewModel
+@{
+    ViewData["Title"] = "Chat Page";
+}
+
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="ru">
+<head>
+
+    <title>Чат</title>
+    <link rel="stylesheet" href="~/css/Chat.css" media="screen">
+
+</head>
+
+<body background="~/images/@Model._imagePath" class="u-xl-mode" data-lang="ru">
+
+    <section class="u-align-center u-clearfix u-image u-section-1" data-image-width="2000" data-image-height="1333" id="sec-45cb">
+
+        <form method="post" controller="Home" action="AddMessange">
+
+            <input type="hidden" name="_Id" value=@Model._TextMessange.Id />
+            <input type="hidden" name="_EmailSender" value=@Model._TextMessange.EmailSender />
+            <input type="hidden" name="_UserRecipientMess" value=@Model._TextMessange.UserRecipientMess />
+            <input type="hidden" name="_User.UserName" value=@Model._User.UserName />
+            <input type="hidden" name="_User.Email" value=@Model._User.Email />
+
+            <div class="u-clearfix u-sheet u-sheet-1">
+                <h6 class="u-align-right u-text u-text-1">@Model._NameChat</h6>
+                <div class="u-container-style u-grey-10 u-group u-group-1">
+                    <textarea cols="200" rows="7" autofocus required >@Model._TextMessange.TextMessange</textarea>
+                </div>
+
+                <div class="u-container-style u-grey-10 u-group u-group-2">
+                    <textarea name="_TextNewMessange" cols="200" rows="3" placeholder="Текст..."></textarea>
+                </div>
+
+                <div>
+                    <p><input type="submit" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1" value="Отправить" /></p>
+                </div>
+            </div>
+        </form>
+
+    </section>
+
+</body>
+</html>
+

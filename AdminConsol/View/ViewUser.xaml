@@ -1,0 +1,109 @@
+﻿<Window x:Name="ViewUserName" x:Class="AdminConsol.View.ViewUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdminConsol.View"
+        mc:Ignorable="d"
+        Title="Справочник клиентов" Height="450" Width="772" Icon="/AdminConsol;component/Root/1300.jpg">
+    <!--Набор стиля-->
+    <Window.Resources>
+        <!--Background-->
+        <Style x:Key="StyleBackground">
+            <Setter Property="Control.Background" Value="#FF1E89A0"/>
+            <Setter Property="Control.Foreground" Value="Black" />
+            <Setter Property="Control.BorderBrush" Value="#FF1E89A0" />
+        </Style>
+        <!--Button-->
+        <Style x:Key="StyleButton">
+            <Setter Property="Button.Background" Value="#FF186FB8"/>
+            <Setter Property="Button.Foreground" Value="Black" />
+            <Setter Property="Button.FontFamily" Value="Arial Black" />
+            <Setter Property="Button.FontSize" Value="14" />
+        </Style>
+        <!--List-->
+        <Style x:Key="StyleList">
+            <Setter Property="ListView.Background" Value="#FF1E89A0"/>
+            <Setter Property="ListView.Foreground" Value="Black" />
+            <Setter Property="ListView.FontFamily" Value="Arial Black" />
+            <Setter Property="ListView.FontSize" Value="12" />
+        </Style>
+    </Window.Resources>
+    <!--Основная сетка-->
+    <Grid Style="{StaticResource StyleBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!--Контент-->
+        <!--Верх основной сетки-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.25*"></RowDefinition>
+                <!--<RowDefinition Height="0.25*"></RowDefinition>-->
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                <ColumnDefinition Width="0.25*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--Контент-->
+            <Button x:Name="AddButton" Content="Создать" Grid.Row="1" Grid.Column="0" Style="{StaticResource StyleButton}" Click="AddButton_Click" />
+            <Button x:Name="EditButton" Content="Изменить" Grid.Row="1" Grid.Column="1" Style="{StaticResource StyleButton}" Click="EditButton_Click" />
+            <Button x:Name="DeleteButton" Content="Удалить" Grid.Row="1" Grid.Column="2" Style="{StaticResource StyleButton}" Click="DeleteButton_Click" />
+            <Button x:Name="FindButton" Content="Найти" Grid.Row="1" Grid.Column="3"   Style="{StaticResource StyleButton}"  Click="FindButton_Click"/>
+            <Button x:Name="RefButton" Content="Обновить/Сброс фильтра" FontSize="10" Grid.Row="1" Grid.Column="4"   Style="{StaticResource StyleButton}" Click="RefButton_Click"/>
+            <!--//-->
+            <!--Низ основной сетки-->
+        </Grid >
+        <ListView x:Name="UserListView" ItemsSource="{Binding UserListView,Mode=OneWay}" Grid.Row="1" Style="{StaticResource StyleList}">
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}">
+                        <GridViewColumnHeader x:Name="Id" Content="Id" Click="Id_Click"/>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding UserSurName}">
+                        <GridViewColumnHeader x:Name="UserSurName" Content="Фамилия" Click="UserSurName_Click"/>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding UserName}">
+                        <GridViewColumnHeader x:Name="UserName" Content="Имя" Click="UserName_Click"/>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding UserMiddleName}" >
+                        <GridViewColumnHeader x:Name="UserMiddleName" Content="Отчество" Click="UserMiddleName_Click"/>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Email}">
+                        <GridViewColumnHeader x:Name="Email" Content="Email" Click="Email_Click"/>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding PhoneNumber}">
+                        <GridViewColumnHeader x:Name="PhoneNumber" Content="Номер телефона" Click="PhoneNumber_Click"/>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Address}">
+                        <GridViewColumnHeader x:Name="Address" Content="Адрес" Click="Address_Click"/>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Role}">
+                        <GridViewColumnHeader x:Name="Role" Content="Роль" Click="Role_Click"/>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Desription}">
+                        <GridViewColumnHeader x:Name="Desription" Content="Описание"/>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Создать" Click="AddButton_Click" />
+                    <MenuItem Header="Изменить" Click="EditButton_Click"/>
+                    <MenuItem Header="Удалить" Click="DeleteButton_Click" />
+                    <MenuItem Header="Найти" Click="FindButton_Click" />
+                    <MenuItem Header="Сбросить/Обновить" Click="RefButton_Click" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+        
+    </Grid>
+</Window>
